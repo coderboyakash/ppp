@@ -24,7 +24,7 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWrapper = async (
-  args: { url: string; alert?: boolean },
+  args: { url: string; alert?: boolean, body?: any, method?: string },
   api: BaseQueryApi,
   extraOptions: Parameters<typeof baseQuery>[2],
 ) => {

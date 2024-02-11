@@ -7,7 +7,7 @@ export const AuthApiSlice = ApiSlice.injectEndpoints({
         url: `auth/signin`,
         method: "POST",
         body,
-        alert: true,
+        alert: false,
       }),
     }),
     verify: builder.mutation({
@@ -21,7 +21,7 @@ export const AuthApiSlice = ApiSlice.injectEndpoints({
     resend: builder.mutation({
       query: (body) => ({
         url: `auth/resend-otp`,
-        method: "POST",
+        method: "PATCH",
         body,
         alert: true,
       }),

@@ -31,7 +31,7 @@ const Verify = () => {
     const response = await verify({ email, otp }).unwrap();
     if(response.status){
       localStorage.setItem("token", response.token);
-      dispatch(setAuth({ loggedIn: true, user: response.data[0] }))
+      dispatch(setAuth({ isLoggedIn: true, user: response.data[0] }))
       navigate(routes.Home)
     }
   }

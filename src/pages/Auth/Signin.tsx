@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useSigninMutation } from "../../store/Auth/AuthApiSlice";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import routes from "../../utils/routes";
+import {colors} from "../../utils/constants.ts";
 
 const Signin = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -58,9 +59,8 @@ const Signin = () => {
                 await onSubmitCred(values.email, values.password);
               }}
               validationSchema={Yup.object().shape({
-                email: Yup.string().email().required("Email is required"),
-
-                password: Yup.string().required("Please enter your password"),
+                email: Yup.string().email().required("Email field is required"),
+                password: Yup.string().required("Password field is required"),
               })}
             >
               {(props) => {
@@ -77,7 +77,7 @@ const Signin = () => {
                     <Form>
                       <Box mt={"10px"} ml="2rem">
                         <Text
-                          color={"#141D43"}
+                          color={colors.dark}
                           fontSize={{
                             base: "sm",
                             md: "sm",
@@ -93,7 +93,7 @@ const Signin = () => {
                         </Text>
                         <Input
                           type="email"
-                          color={"#141D43"}
+                          color={colors.dark}
                           w={{
                             base: "15rem",
                             md: "28rem",
@@ -101,7 +101,7 @@ const Signin = () => {
                           }}
                           marginTop="10px"
                           id="email"
-                          bg={"#fff"}
+                          bg={colors.light}
                           placeholder="Enter your email address"
                           value={values.email}
                           onChange={handleChange}
@@ -116,16 +116,16 @@ const Signin = () => {
                           _focusVisible={
                             errors.email && touched.email
                               ? {
-                                  border: "1px solid red !important",
+                                  border: `1px solid ${colors.error}!important`,
                                 }
                               : {
-                                  border: "1px solid #6C3B1C",
+                                  border: `1px solid ${colors.primary}`,
                                 }
                           }
                         />
                         {errors.email && touched.email && (
                           <Box color="red.500" marginTop={"10px"}>
-                            {errors.email}
+                            {errors?.email}
                           </Box>
                         )}
                       </Box>
@@ -221,14 +221,14 @@ const Signin = () => {
                           </Box>
                           {errors.password && touched.password && (
                             <Box color="red.500" marginTop={"10px"}>
-                              {errors.password}
+                              {errors?.password}
                             </Box>
                           )}
                         </Box>
                       </Box>
                       <Button
                         ml="2rem"
-                        bg="#6C3B1C"
+                        bg={colors.primary}
                         color={"white"}
                         w={{
                           base: "15rem",
@@ -240,8 +240,8 @@ const Signin = () => {
                         type="submit"
                         isLoading={isLoading}
                         _hover={{
-                          color: "#000",
-                          background: "lightgray",
+                          color: colors.white,
+                          background: colors.secondary,
                         }}
                       >
                         Login now
@@ -252,7 +252,7 @@ const Signin = () => {
                         variant="link"
                         size={{ base: "xs", md: "sm" }}
                         onClick={() => {
-                          navigate("/forgot-password");
+                          navigate(routes.ForgotPassword);
                           localStorage.setItem("isExistingUser", "true");
                         }}
                       >

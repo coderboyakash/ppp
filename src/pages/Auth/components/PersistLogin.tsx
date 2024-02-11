@@ -18,13 +18,16 @@ const PersistLogin = () => {
   const location = useLocation();
   const checkLoginStatus = async () => {
     const token: string = localStorage.getItem('token') ?? ""
-    const decoded: JwtDecoded | null = jwtDecode(token)
-    const email = decoded?.email
-    const response = await getLoggedInUser({ email }).unwrap();
-    if (response.status === true) {
-      dispatch(setAuth({ isLoggedIn: true, user: response.data[0] }))
-      navigate([routes.Signin, routes.Verify].includes(location.pathname) ? routes.Home : location.pathname)
+    if(token.trim() !== ""){
+      const decoded: JwtDecoded | null = jwtDecode(token)
+      const email = decoded?.email
+      const response = await getLoggedInUser({ email }).unwrap();
+      if (response.status === true) {
+        dispatch(setAuth({ isLoggedIn: true, user: response.data[0] }))
+        navigate([routes.Signin, routes.Verify].includes(location.pathname) ? routes.Home : location.pathname)
+      }
     }
+    
   };
 
   useEffect(() => {

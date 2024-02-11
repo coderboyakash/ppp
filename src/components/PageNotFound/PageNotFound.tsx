@@ -1,4 +1,6 @@
 import styles from "./styles.module.css";
+import {colors} from "../../utils/constants.ts";
+import routes from "../../utils/routes.ts";
 const PageNotFound = () => {
   return (
     <div className={styles.wrapper}>
@@ -11,7 +13,9 @@ const PageNotFound = () => {
           The page you are looking for might have been removed had its name
           changed or is temporarily unavailable.
         </p>
-        <a href="/">Back To Homepage</a>
+        <a style={{ background: colors.primary, color: colors.white }} href={routes.Home}>
+          Back To Homepage
+        </a>
       </div>
     </div>
   );
